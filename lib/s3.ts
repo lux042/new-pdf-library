@@ -1,4 +1,3 @@
-// lib/s3.ts
 import {
   S3Client,
   PutObjectCommand,
@@ -14,7 +13,7 @@ function must(name: string) {
   return v;
 }
 
-// ✅ single shared S3 client
+// ✅ Single shared client
 export const s3 = new S3Client({
   region: must("AWS_REGION"),
   credentials: {
@@ -29,7 +28,6 @@ export function bucketInfo() {
   return { bucket, prefix };
 }
 
-// ✅ required by create-upload route
 export async function presignPut(key: string, contentType: string) {
   const { bucket } = bucketInfo();
 
@@ -39,10 +37,10 @@ export async function presignPut(key: string, contentType: string) {
     ContentType: contentType,
   });
 
-  return getSignedUrl(s3, cmd, { expiresIn: 300 }); // 5 min
+  // longer is nicer for real uploads
+  return getSignedUrl(s3, cmd, { expiresIn: 300 });
 }
 
-// ✅ used by /pdfs/[id] route to open directly
 export async function presignGet(key: string, filename?: string) {
   const { bucket } = bucketInfo();
 
@@ -55,21 +53,28 @@ export async function presignGet(key: string, filename?: string) {
       : {}),
   });
 
-  return getSignedUrl(s3, cmd, { expiresIn: 300 }); // 5 min
+  return getSignedUrl(s3, cmd, { expiresIn: 300 });
 }
 
-// ✅ used by finalize-upload
+/**
+ * ✅ Checks if an object exists (true/false)
+ * IMPORTANT: If IAM explicitly denies HeadObject, this will throw.
+ */
 export async function existsObject(key: string): Promise<boolean> {
   const { bucket } = bucketInfo();
   try {
     await s3.send(new HeadObjectCommand({ Bucket: bucket, Key: key }));
     return true;
-  } catch {
-    return false;
+  } catch (err: any) {
+    // "not found" cases
+    const status = err?.$metadata?.httpStatusCode;
+    if (status === 404 || err?.name === "NotFound" || err?.Code === "NotFound") return false;
+
+    // Anything else (403 AccessDenied etc) should bubble up
+    throw err;
   }
 }
 
-// ✅ used by delete route
 export async function deleteObject(key: string) {
   const { bucket } = bucketInfo();
   await s3.send(new DeleteObjectCommand({ Bucket: bucket, Key: key }));
