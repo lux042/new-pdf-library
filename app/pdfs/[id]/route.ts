@@ -8,16 +8,15 @@ export async function GET(
 ) {
   const { id } = await params;
 
-  if (!id) {
-    return NextResponse.json({ error: "Missing id" }, { status: 400 });
-  }
-
   const pdf = await prisma.pdf.findUnique({ where: { id } });
   if (!pdf) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
 
-  // If your presignGet accepts filename, pass it; otherwise remove the 2nd arg.
+  // Redirect to a short-lived signed URL for the *exact* stored key
   const url = await presignGet(pdf.storageKey, pdf.originalName);
-  return NextResponse.redirect(url);
+
+  const res = NextResponse.redirect(url, 307);
+  res.headers.set("Cache-Control", "no-store");
+  return res;
 }
