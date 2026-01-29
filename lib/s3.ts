@@ -13,7 +13,6 @@ function must(name: string) {
   return v;
 }
 
-// ✅ Single shared client
 export const s3 = new S3Client({
   region: must("AWS_REGION"),
   credentials: {
@@ -30,48 +29,46 @@ export function bucketInfo() {
 
 export async function presignPut(key: string, contentType: string) {
   const { bucket } = bucketInfo();
-
-  const cmd = new PutObjectCommand({
-    Bucket: bucket,
-    Key: key,
-    ContentType: contentType,
-  });
-
-  // longer is nicer for real uploads
+  const cmd = new PutObjectCommand({ Bucket: bucket, Key: key, ContentType: contentType });
   return getSignedUrl(s3, cmd, { expiresIn: 300 });
 }
 
 export async function presignGet(key: string, filename?: string) {
   const { bucket } = bucketInfo();
-
   const cmd = new GetObjectCommand({
     Bucket: bucket,
     Key: key,
     ResponseContentType: "application/pdf",
-    ...(filename
-      ? { ResponseContentDisposition: `inline; filename="${filename}"` }
-      : {}),
+    ...(filename ? { ResponseContentDisposition: `inline; filename="${filename}"` } : {}),
   });
-
   return getSignedUrl(s3, cmd, { expiresIn: 300 });
 }
 
-/**
- * ✅ Checks if an object exists (true/false)
- * IMPORTANT: If IAM explicitly denies HeadObject, this will throw.
- */
-export async function existsObject(key: string): Promise<boolean> {
+export async function existsObject(key: string): Promise<{
+  ok: boolean;
+  status?: number;
+  code?: string;
+  message?: string;
+}> {
   const { bucket } = bucketInfo();
   try {
     await s3.send(new HeadObjectCommand({ Bucket: bucket, Key: key }));
-    return true;
+    return { ok: true };
   } catch (err: any) {
-    // "not found" cases
     const status = err?.$metadata?.httpStatusCode;
-    if (status === 404 || err?.name === "NotFound" || err?.Code === "NotFound") return false;
+    const code = err?.name || err?.Code;
 
-    // Anything else (403 AccessDenied etc) should bubble up
-    throw err;
+    // S3 "not found"
+    if (status === 404 || code === "NotFound" || code === "NoSuchKey") {
+      return { ok: false, status, code };
+    }
+
+    // Permission / policy issue (this is what you’re hitting)
+    if (status === 403 || code === "AccessDenied") {
+      return { ok: false, status, code, message: err?.message };
+    }
+
+    return { ok: false, status, code, message: err?.message };
   }
 }
 
