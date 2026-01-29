@@ -1,0 +1,12 @@
+{
+  "/admin/page": "app/admin/page.js",
+  "/api/admin/login/route": "app/api/admin/login/route.js",
+  "/api/admin/logout/route": "app/api/admin/logout/route.js",
+  "/api/pdfs/[id]/delete/route": "app/api/pdfs/[id]/delete/route.js",
+  "/api/pdfs/create-upload/route": "app/api/pdfs/create-upload/route.js",
+  "/api/pdfs/finalize-upload/route": "app/api/pdfs/finalize-upload/route.js",
+  "/api/pdfs/list/route": "app/api/pdfs/list/route.js",
+  "/library/page": "app/library/page.js",
+  "/page": "app/page.js",
+  "/pdfs/[id]/route": "app/pdfs/[id]/route.js"
+}

@@ -1,0 +1,229 @@
+/* [project]/pdf-library-main/app/library/library.css [app-client] (css) */
+:root {
+  --paper: #f6f1e7;
+  --card: #fffaf0;
+  --ink: #2e2a26;
+  --accent: #e6d3b3;
+  --accent-strong: #d9be8a;
+  --danger: #c94b4b;
+  --shadow: #0002;
+}
+
+.library-page {
+  background: var(--paper);
+  min-height: 100vh;
+  color: var(--ink);
+  padding: 40px 24px;
+  font-family: ui-serif, Georgia, Times New Roman, serif;
+}
+
+.library-header {
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  display: flex;
+}
+
+.library-title {
+  letter-spacing: 1px;
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.admin-btn {
+  background: var(--card);
+  border: 2px solid var(--ink);
+  color: var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all .12s;
+}
+
+.admin-btn:hover {
+  box-shadow: 1px 1px 0 var(--ink);
+  background: var(--accent);
+  transform: translate(1px, 1px);
+}
+
+.panel {
+  background: var(--card);
+  border: 3px solid var(--ink);
+  box-shadow: 6px 6px 0 var(--ink);
+  border-radius: 10px;
+  margin-bottom: 18px;
+  padding: 14px;
+}
+
+.controls {
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  display: flex;
+}
+
+.input {
+  border: 2px solid var(--ink);
+  background: #fff;
+  border-radius: 8px;
+  min-width: 140px;
+  padding: 8px 10px;
+  font-family: inherit;
+}
+
+.input:focus {
+  background: #fffdf6;
+  outline: none;
+}
+
+.btn {
+  border: 2px solid var(--ink);
+  background: var(--accent);
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--ink);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-family: inherit;
+  font-weight: 700;
+  transition: all .12s;
+}
+
+.btn:hover {
+  box-shadow: 1px 1px 0 var(--ink);
+  background: var(--accent-strong);
+  transform: translate(1px, 1px);
+}
+
+.btn:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+.tags {
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  display: flex;
+}
+
+.tag {
+  border: 2px solid var(--ink);
+  cursor: pointer;
+  background: #fff;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-family: inherit;
+  font-size: 13px;
+  transition: all .12s;
+}
+
+.tag:hover {
+  background: #fff3da;
+}
+
+.tag-active {
+  background: var(--accent);
+  font-weight: 600;
+}
+
+.catalog-card {
+  background: var(--card);
+  border: 3px solid var(--ink);
+  box-shadow: 6px 6px 0 var(--ink);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.catalog-header {
+  background: var(--accent);
+  border-bottom: 3px solid var(--ink);
+  grid-template-columns: 2fr 100px 160px 100px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 700;
+  display: grid;
+}
+
+.catalog-row {
+  border-bottom: 1px solid #e7dfd0;
+  grid-template-columns: 2fr 100px 160px 100px;
+  align-items: center;
+  padding: 12px 14px;
+  transition: background .12s;
+  display: grid;
+}
+
+.catalog-row:hover {
+  background: #fff6e7;
+}
+
+.file-cell {
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  display: flex;
+}
+
+.file-name {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-weight: 600;
+  overflow: hidden;
+}
+
+.file-tags {
+  flex-wrap: wrap;
+  gap: 6px;
+  display: flex;
+}
+
+.mini-tag {
+  border: 1.5px solid var(--ink);
+  cursor: pointer;
+  background: #fff;
+  border-radius: 999px;
+  padding: 3px 8px;
+  font-family: inherit;
+  font-size: 12px;
+}
+
+.mini-tag:hover {
+  background: #fff3da;
+}
+
+.open-btn {
+  text-align: center;
+  border: 2px solid var(--ink);
+  color: var(--ink);
+  box-shadow: 2px 2px 0 var(--ink);
+  background: #fff;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all .12s;
+}
+
+.open-btn:hover {
+  box-shadow: 1px 1px 0 var(--ink);
+  background: var(--accent);
+  transform: translate(1px, 1px);
+}
+
+.empty-state {
+  text-align: center;
+  opacity: .6;
+  padding: 40px;
+  font-style: italic;
+}
+
+.hint {
+  opacity: .65;
+  font-size: 14px;
+}
+
+/*# sourceMappingURL=pdf-library-main_app_library_library_1a5466f2.css.map*/

@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 14, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/urnob/OneDrive/Desktop/pdf-library-main/app/page.tsx"],"sourcesContent":["import { redirect } from \"next/navigation\";\n\nexport default function Home() {\n  redirect(\"/library\");\n}\n"],"names":[],"mappings":";;;;AAAA;AAAA;;AAEe,SAAS;IACtB,IAAA,2NAAQ,EAAC;AACX"}}]
+}

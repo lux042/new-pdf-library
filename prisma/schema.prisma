@@ -1,0 +1,20 @@
+generator client {
+  provider   = "prisma-client-js"
+  engineType = "binary"
+}
+
+datasource db {
+  provider = "postgresql"
+
+}
+
+model Pdf {
+  id           String   @id @default(cuid())
+  originalName String
+  storageKey   String   @unique
+  mimeType     String
+  sizeBytes    BigInt
+  createdAt    DateTime @default(now())
+
+  tags         String[] @default([])
+}

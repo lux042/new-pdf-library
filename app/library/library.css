@@ -1,0 +1,275 @@
+/* ========================================
+   THEME TOKENS (same vibe as admin.css)
+======================================== */
+
+:root {
+  --paper: #f6f1e7;
+  --card: #fffaf0;
+  --ink: #2e2a26;
+  --accent: #e6d3b3;
+  --accent-strong: #d9be8a;
+  --danger: #c94b4b;
+  --shadow: #00000022;
+}
+
+/* ========================================
+   PAGE
+======================================== */
+
+.library-page {
+  min-height: 100vh;
+  padding: 40px 24px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: ui-serif, Georgia, "Times New Roman", serif;
+}
+
+/* ========================================
+   HEADER
+======================================== */
+
+.library-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.library-title {
+  margin: 0;
+  font-size: 28px;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+/* Admin button styled like library card */
+.admin-btn {
+  padding: 8px 14px;
+  background: var(--card);
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--ink);
+  font-weight: 600;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: 0.12s;
+}
+
+.admin-btn:hover {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--ink);
+  background: var(--accent);
+}
+
+/* ========================================
+   PANELS (search/upload areas)
+======================================== */
+
+.panel {
+  background: var(--card);
+  border: 3px solid var(--ink);
+  border-radius: 10px;
+  box-shadow: 6px 6px 0 var(--ink);
+  padding: 14px;
+  margin-bottom: 18px;
+}
+
+/* ========================================
+   CONTROLS
+======================================== */
+
+.controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.input {
+  padding: 8px 10px;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  font-family: inherit;
+  background: white;
+  min-width: 140px;
+}
+
+.input:focus {
+  outline: none;
+  background: #fffdf6;
+}
+
+/* Buttons */
+.btn {
+  padding: 8px 12px;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  background: var(--accent);
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 700;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: 0.12s;
+}
+
+.btn:hover {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--ink);
+  background: var(--accent-strong);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ========================================
+   TAG CHIPS
+======================================== */
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.tag {
+  border: 2px solid var(--ink);
+  background: #fff;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.12s;
+}
+
+.tag:hover {
+  background: #fff3da;
+}
+
+.tag-active {
+  background: var(--accent);
+  font-weight: 600;
+}
+
+/* ========================================
+   CATALOG TABLE CARD
+======================================== */
+
+.catalog-card {
+  background: var(--card);
+  border: 3px solid var(--ink);
+  border-radius: 10px;
+  box-shadow: 6px 6px 0 var(--ink);
+  overflow: hidden;
+}
+
+/* Header row */
+.catalog-header {
+  display: grid;
+  grid-template-columns: 2fr 100px 160px 100px;
+  font-weight: 700;
+  font-size: 14px;
+  background: var(--accent);
+  padding: 10px 14px;
+  border-bottom: 3px solid var(--ink);
+}
+
+/* Rows */
+.catalog-row {
+  display: grid;
+  grid-template-columns: 2fr 100px 160px 100px;
+  padding: 12px 14px;
+  border-bottom: 1px solid #e7dfd0;
+  align-items: center;
+  transition: background 0.12s;
+}
+
+.catalog-row:hover {
+  background: #fff6e7;
+}
+
+/* ========================================
+   FILE CELLS
+======================================== */
+
+.file-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.file-name {
+  font-weight: 600;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Mini tag chips */
+.file-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.mini-tag {
+  border: 1.5px solid var(--ink);
+  background: white;
+  border-radius: 999px;
+  padding: 3px 8px;
+  font-size: 12px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.mini-tag:hover {
+  background: #fff3da;
+}
+
+/* ========================================
+   OPEN BUTTON
+======================================== */
+
+.open-btn {
+  text-align: center;
+  padding: 6px 10px;
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  background: white;
+  color: var(--ink);
+  box-shadow: 2px 2px 0 var(--ink);
+  transition: 0.12s;
+}
+
+.open-btn:hover {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--ink);
+  background: var(--accent);
+}
+
+/* ========================================
+   EMPTY STATE
+======================================== */
+
+.empty-state {
+  padding: 40px;
+  text-align: center;
+  opacity: 0.6;
+  font-style: italic;
+}
+
+/* ========================================
+   SMALL TEXT
+======================================== */
+
+.hint {
+  opacity: 0.65;
+  font-size: 14px;
+}
