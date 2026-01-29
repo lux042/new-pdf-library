@@ -13,6 +13,14 @@ function must(name: string) {
   return v;
 }
 
+export function bucketInfo() {
+  // Use ONE env var name everywhere (recommended: S3_BUCKET)
+  const bucket = must("S3_BUCKET");
+  const prefix = process.env.S3_PREFIX || "pdfs";
+  return { bucket, prefix };
+}
+
+// Single shared client (don’t redeclare)
 export const s3 = new S3Client({
   region: must("AWS_REGION"),
   credentials: {
@@ -20,12 +28,6 @@ export const s3 = new S3Client({
     secretAccessKey: must("AWS_SECRET_ACCESS_KEY"),
   },
 });
-
-export function bucketInfo() {
-  const bucket = must("S3_BUCKET");
-  const prefix = process.env.S3_PREFIX || "pdfs";
-  return { bucket, prefix };
-}
 
 export async function presignPut(key: string, contentType: string) {
   const { bucket } = bucketInfo();
@@ -36,7 +38,6 @@ export async function presignPut(key: string, contentType: string) {
     ContentType: contentType,
   });
 
-  // Give the browser a little time to upload
   return getSignedUrl(s3, cmd, { expiresIn: 300 }); // 5 minutes
 }
 
@@ -46,7 +47,6 @@ export async function presignGet(key: string, filename?: string) {
   const cmd = new GetObjectCommand({
     Bucket: bucket,
     Key: key,
-    // Force browser to treat it as a PDF
     ResponseContentType: "application/pdf",
     ...(filename
       ? { ResponseContentDisposition: `inline; filename="${filename}"` }
@@ -56,18 +56,20 @@ export async function presignGet(key: string, filename?: string) {
   return getSignedUrl(s3, cmd, { expiresIn: 300 }); // 5 minutes
 }
 
-export async function existsObject(key: string) {
-  const { bucket } = bucketInfo();
+export async function existsObject(params: { bucket: string; key: string }): Promise<boolean> {
   try {
     await s3.send(
       new HeadObjectCommand({
-        Bucket: bucket,
-        Key: key,
+        Bucket: params.bucket,
+        Key: params.key,
       })
     );
     return true;
-  } catch {
-    return false;
+  } catch (err: any) {
+    // Not found
+    if (err?.name === "NotFound" || err?.$metadata?.httpStatusCode === 404) return false;
+    if (err?.Code === "NotFound") return false;
+    throw err;
   }
 }
 

@@ -30,6 +30,14 @@
       "namedRegex": "^/api/pdfs/(?<nxtPid>[^/]+?)/delete(?:/)?$"
     },
     {
+      "page": "/api/pdfs/[id]/signed-url",
+      "regex": "^/api/pdfs/([^/]+?)/signed\\-url(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/pdfs/(?<nxtPid>[^/]+?)/signed\\-url(?:/)?$"
+    },
+    {
       "page": "/pdfs/[id]",
       "regex": "^/pdfs/([^/]+?)(?:/)?$",
       "routeKeys": {
@@ -44,14 +52,6 @@
         "nxtPid": "nxtPid"
       },
       "namedRegex": "^/pdfs/(?<nxtPid>[^/]+?)/signed\\-url(?:/)?$"
-    },
-    {
-      "page": "/view/[id]",
-      "regex": "^/view/([^/]+?)(?:/)?$",
-      "routeKeys": {
-        "nxtPid": "nxtPid"
-      },
-      "namedRegex": "^/view/(?<nxtPid>[^/]+?)(?:/)?$"
     }
   ],
   "staticRoutes": [

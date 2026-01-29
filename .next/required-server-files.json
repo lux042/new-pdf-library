@@ -100,7 +100,7 @@
         "transform": "lodash/{{member}}"
       }
     },
-    "outputFileTracingRoot": "C:\\Users\\urnob\\OneDrive\\Desktop\\pdf-library",
+    "outputFileTracingRoot": "C:\\Users\\urnob\\OneDrive\\Desktop\\pdf-library-main",
     "cacheComponents": false,
     "cacheLife": {
       "default": {
@@ -294,11 +294,11 @@
     "bundlePagesRouterDependencies": false,
     "configFileName": "next.config.js",
     "turbopack": {
-      "root": "C:\\Users\\urnob\\OneDrive\\Desktop\\pdf-library"
+      "root": "C:\\Users\\urnob\\OneDrive\\Desktop\\pdf-library-main"
     },
     "distDirRoot": ".next"
   },
-  "appDir": "C:\\Users\\urnob\\OneDrive\\Desktop\\pdf-library",
+  "appDir": "C:\\Users\\urnob\\OneDrive\\Desktop\\pdf-library-main",
   "relativeAppDir": "",
   "files": [
     ".next\\routes-manifest.json",

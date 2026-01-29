@@ -6,12 +6,12 @@
   "/api/admin/logout/route": "/api/admin/logout",
   "/api/admin/page": "/api/admin",
   "/api/pdfs/[id]/delete/route": "/api/pdfs/[id]/delete",
+  "/api/pdfs/[id]/signed-url/route": "/api/pdfs/[id]/signed-url",
   "/api/pdfs/create-upload/route": "/api/pdfs/create-upload",
   "/api/pdfs/finalize-upload/route": "/api/pdfs/finalize-upload",
   "/api/pdfs/list/route": "/api/pdfs/list",
   "/library/page": "/library",
   "/page": "/",
   "/pdfs/[id]/route": "/pdfs/[id]",
-  "/pdfs/[id]/signed-url/route": "/pdfs/[id]/signed-url",
-  "/view/[id]/page": "/view/[id]"
+  "/pdfs/[id]/signed-url/route": "/pdfs/[id]/signed-url"
 }
