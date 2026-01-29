@@ -17,21 +17,17 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
   }
 
-  const pdf = await prisma.pdf.findUnique({
-    where: { id: parsed.data.pdfId },
-  });
+  const pdf = await prisma.pdf.findUnique({ where: { id: parsed.data.pdfId } });
   if (!pdf) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
 
-  const exists = await existsObject({
-    bucket: process.env.S3_BUCKET!, // <-- match bucketInfo()
-    key: pdf.storageKey,  
-  });
+  const exists = await existsObject(pdf.storageKey);
 
   if (!exists) {
     await prisma.pdf.delete({ where: { id: pdf.id } }).catch(() => {});
-    return NextResponse.json({ error: "Upload missing in S3" }, { status: 400 });
+    // 409 is nicer here because it means “conflict / not ready”
+    return NextResponse.json({ error: "Upload missing in S3" }, { status: 409 });
   }
 
   return NextResponse.json({ ok: true });
